@@ -1,0 +1,229 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Prompt Evaluation Report</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 20px;
+                color: #333;
+            }
+            .header {
+                background-color: #f0f0f0;
+                padding: 20px;
+                border-radius: 5px;
+                margin-bottom: 20px;
+            }
+            .summary-stats {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .stat-box {
+                background-color: #fff;
+                border-radius: 5px;
+                padding: 15px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                flex-basis: 30%;
+                min-width: 200px;
+            }
+            .stat-value {
+                font-size: 24px;
+                font-weight: bold;
+                margin-top: 5px;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+            th {
+                background-color: #4a4a4a;
+                color: white;
+                text-align: left;
+                padding: 12px;
+            }
+            td {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+                vertical-align: top;
+            }
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            .output-cell {
+                white-space: pre-wrap;
+            }
+            .score {
+                font-weight: bold;
+                padding: 5px 10px;
+                border-radius: 3px;
+                display: inline-block;
+            }
+            .score-high {
+                background-color: #c8e6c9;
+                color: #2e7d32;
+            }
+            .score-medium {
+                background-color: #fff9c4;
+                color: #f57f17;
+            }
+            .score-low {
+                background-color: #ffcdd2;
+                color: #c62828;
+            }
+            .output {
+                overflow: auto;
+                white-space: pre-wrap;
+            }
+
+            .output pre {
+                background-color: #f5f5f5;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                padding: 10px;
+                margin: 0;
+                font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+                font-size: 14px;
+                line-height: 1.4;
+                color: #333;
+                box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+                overflow-x: auto;
+                white-space: pre-wrap; 
+                word-wrap: break-word; 
+            }
+
+            td {
+                width: 20%;
+            }
+            .score-col {
+                width: 80px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Prompt Evaluation Report</h1>
+            <div class="summary-stats">
+                <div class="stat-box">
+                    <div>Total Test Cases</div>
+                    <div class="stat-value">3</div>
+                </div>
+                <div class="stat-box">
+                    <div>Average Score</div>
+                    <div class="stat-value">8.0 / 10</div>
+                </div>
+                <div class="stat-box">
+                    <div>Pass Rate (≥7)</div>
+                    <div class="stat-value">100.0%</div>
+                </div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Scenario</th>
+                    <th>Prompt Inputs</th>
+                    <th>Solution Criteria</th>
+                    <th>Output</th>
+                    <th>Score</th>
+                    <th>Reasoning</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+            <tr>
+                <td>Testing with a passage containing implicit vs. explicit topics, where some topics are directly stated while others are implied through examples and evidence, to verify the prompt handles both surface-level and inferred concepts</td>
+                <td class="prompt-inputs"><strong>content:</strong> Recent advances in neuroplasticity research have demonstrated that the adult brain retains remarkable capacity for reorganization and adaptation. Studies examining stroke patients who regained motor function through intensive rehabilitation reveal how undamaged neural regions compensate by establishing new synaptic connections, a process mediated by neurotrophic factors such as brain-derived neurotrophic factor (BDNF). Furthermore, longitudinal investigations of London taxi drivers, who must memorize complex street networks, show significant hippocampal enlargement compared to control groups, suggesting that sustained cognitive demands drive structural brain changes. These findings challenge the traditional view of neural rigidity and have profound implications for therapeutic interventions in neurodegenerative diseases, where understanding these adaptive mechanisms could inform treatment strategies.</td>
+                <td class="criteria">• Extracts both explicitly stated topics (neuroplasticity, stroke rehabilitation, BDNF, hippocampal enlargement) and implicitly inferred topics (neural adaptation, cognitive demands, neurodegenerative disease treatment)<br>• Returns output as a valid JSON array of strings<br>• Avoids including generic terms already embedded in the passage while capturing distinct conceptual areas</td>
+                <td class="output"><pre>```json
+[
+  "neuroplasticity",
+  "brain reorganization",
+  "stroke rehabilitation",
+  "motor function recovery",
+  "synaptic connections",
+  "neurotrophic factors",
+  "brain-derived neurotrophic factor (BDNF)",
+  "hippocampal enlargement",
+  "cognitive demands",
+  "structural brain changes",
+  "neural adaptation",
+  "neurodegenerative diseases",
+  "therapeutic interventions"
+]
+```</pre></td>
+                <td class="score-col"><span class="score score-high">9</span></td>
+                <td class="reasoning">The solution fully satisfies all mandatory requirements: it is a valid JSON array of strings containing topics from the article with no extra commentary. Regarding secondary criteria, it successfully extracts both explicitly stated topics (neuroplasticity, stroke rehabilitation, BDNF, hippocampal enlargement) and implicitly inferred topics (neural adaptation, cognitive demands, neurodegenerative disease treatment). The extraction avoids generic embedded terms while capturing 13 distinct conceptual areas. The only minor issue is slight conceptual overlap between 'brain reorganization' and 'neural adaptation,' but both represent distinct framings of the same phenomenon and are both present in the source material. The solution demonstrates strong understanding of the passage and appropriate topic extraction methodology.</td>
+            </tr>
+        
+            <tr>
+                <td>Testing with interdisciplinary passage containing mixed topics (e.g., neuroscience, philosophy, and ethics) to ensure the prompt correctly identifies and separates distinct conceptual domains rather than merging related ideas</td>
+                <td class="prompt-inputs"><strong>content:</strong> Recent advances in neurotechnology have raised profound questions at the intersection of neuroscience, philosophy, and bioethics. Researchers developing brain-computer interfaces (BCIs) that decode neural signals must grapple with epistemological questions about the nature of consciousness and whether direct neural measurement can provide objective access to subjective experience. Simultaneously, the clinical deployment of these technologies presents ethical challenges regarding informed consent, as patients with severe paralysis may face pressure to participate in experimental procedures. The philosophical problem of other minds becomes particularly acute when BCIs potentially allow one individual's neural patterns to influence another's motor output, challenging our fundamental assumptions about personal autonomy and individual identity. Furthermore, regulatory frameworks struggle to keep pace with the neuroscientific capabilities, creating a governance gap that intersects policy ethics with technical feasibility.</td>
+                <td class="criteria">• Identifies all four distinct conceptual domains: neuroscience/neurotechnology, philosophy/epistemology, ethics/bioethics, and policy/governance<br>• Separates related but distinct topics (e.g., consciousness as philosophy vs. neural measurement as neuroscience) into different entries<br>• Returns output as a JSON array of strings with no duplicate or merged topics</td>
+                <td class="output"><pre>```json
+[
+  "brain-computer interfaces",
+  "neural signal decoding",
+  "consciousness",
+  "epistemology",
+  "subjective experience",
+  "informed consent",
+  "paralysis",
+  "experimental procedures",
+  "philosophy of other minds",
+  "personal autonomy",
+  "individual identity",
+  "neural patterns",
+  "motor output",
+  "regulatory frameworks",
+  "governance gap",
+  "policy ethics",
+  "bioethics"
+]
+```</pre></td>
+                <td class="score-col"><span class="score score-high">8</span></td>
+                <td class="reasoning">The solution meets all mandatory requirements: it is a valid JSON array of strings with no extra commentary, contains no duplicates, and includes topics from the passage. It successfully addresses the secondary criteria by identifying all four conceptual domains and separating related but distinct topics. However, there are minor gaps in comprehensiveness—some explicitly mentioned concepts like 'neurotechnology,' 'neuroscience,' and 'technical feasibility' are omitted, while a few entries ('neural patterns,' 'motor output') are somewhat granular implementation details rather than primary conceptual topics. These are minor issues that don't violate mandatory requirements but represent incomplete coverage of the source material.</td>
+            </tr>
+        
+            <tr>
+                <td>Testing with a highly specialized passage using domain-specific jargon and acronyms to ensure the prompt extracts meaningful topics while properly handling technical terminology that appears frequently but may not represent distinct topics</td>
+                <td class="prompt-inputs"><strong>content:</strong> Recent advances in CRISPR-Cas9 gene editing have revolutionized molecular biology research, particularly through improvements in off-target mitigation strategies and delivery mechanisms. The sgRNA (single guide RNA) design optimization has significantly reduced unwanted mutations, with specificity scores improving from 87% to 96% through machine learning-assisted prediction models. Furthermore, non-viral delivery vectors, including lipid nanoparticles (LNPs) and adeno-associated viruses (AAVs), have demonstrated enhanced transfection efficiency in primary human cells. PAM (protospacer adjacent motif) flexibility has been expanded through engineered Cas9 variants, enabling targeting of previously inaccessible genomic loci. These developments have direct implications for therapeutic applications in monogenic disorders, though off-target effects remain a critical consideration in clinical translation. The integration of CRISPR technology with high-throughput screening platforms has accelerated functional genomics studies, providing unprecedented insights into gene function and regulatory networks.</td>
+                <td class="criteria">• Extracts distinct topics (e.g., off-target mitigation, sgRNA design, delivery vectors, PAM flexibility, therapeutic applications, functional genomics) while avoiding treating acronyms (CRISPR, sgRNA, LNP, AAV, PAM, Cas9) as separate topics<br>• Returns output as a JSON array of strings<br>• Identifies meaningful scientific concepts rather than repeated technical terminology</td>
+                <td class="output"><pre>```json
+[
+  "CRISPR-Cas9 gene editing",
+  "off-target mitigation strategies",
+  "delivery mechanisms",
+  "sgRNA design optimization",
+  "machine learning-assisted prediction models",
+  "lipid nanoparticles (LNPs)",
+  "adeno-associated viruses (AAVs)",
+  "transfection efficiency",
+  "PAM flexibility",
+  "engineered Cas9 variants",
+  "monogenic disorders",
+  "off-target effects",
+  "clinical translation",
+  "high-throughput screening platforms",
+  "functional genomics",
+  "gene function",
+  "regulatory networks"
+]
+```</pre></td>
+                <td class="score-col"><span class="score score-medium">7</span></td>
+                <td class="reasoning">The solution meets all mandatory requirements: it is a valid JSON array of strings with no extra commentary, and contains topics from the article. It demonstrates good judgment in handling acronyms per the secondary criteria. However, it has moderate deficiencies in topic selection—some entries are overly specific technical details rather than meaningful scientific concepts, and there is some redundancy in related concepts. The solution is functional and largely correct but could be more refined in distinguishing between core topics and implementation details.</td>
+            </tr>
+        
+            </tbody>
+        </table>
+    </body>
+    </html>
+    

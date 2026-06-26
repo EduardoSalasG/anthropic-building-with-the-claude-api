@@ -1,0 +1,53 @@
+[
+  {
+    "output": "```json\n[\n  \"neuroplasticity\",\n  \"brain reorganization\",\n  \"stroke rehabilitation\",\n  \"motor function recovery\",\n  \"synaptic connections\",\n  \"neurotrophic factors\",\n  \"brain-derived neurotrophic factor (BDNF)\",\n  \"hippocampal enlargement\",\n  \"cognitive demands\",\n  \"structural brain changes\",\n  \"neural adaptation\",\n  \"neurodegenerative diseases\",\n  \"therapeutic interventions\"\n]\n```",
+    "test_case": {
+      "prompt_inputs": {
+        "content": "Recent advances in neuroplasticity research have demonstrated that the adult brain retains remarkable capacity for reorganization and adaptation. Studies examining stroke patients who regained motor function through intensive rehabilitation reveal how undamaged neural regions compensate by establishing new synaptic connections, a process mediated by neurotrophic factors such as brain-derived neurotrophic factor (BDNF). Furthermore, longitudinal investigations of London taxi drivers, who must memorize complex street networks, show significant hippocampal enlargement compared to control groups, suggesting that sustained cognitive demands drive structural brain changes. These findings challenge the traditional view of neural rigidity and have profound implications for therapeutic interventions in neurodegenerative diseases, where understanding these adaptive mechanisms could inform treatment strategies."
+      },
+      "solution_criteria": [
+        "Extracts both explicitly stated topics (neuroplasticity, stroke rehabilitation, BDNF, hippocampal enlargement) and implicitly inferred topics (neural adaptation, cognitive demands, neurodegenerative disease treatment)",
+        "Returns output as a valid JSON array of strings",
+        "Avoids including generic terms already embedded in the passage while capturing distinct conceptual areas"
+      ],
+      "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+      "scenario": "Testing with a passage containing implicit vs. explicit topics, where some topics are directly stated while others are implied through examples and evidence, to verify the prompt handles both surface-level and inferred concepts"
+    },
+    "score": 9,
+    "reasoning": "The solution fully satisfies all mandatory requirements: it is a valid JSON array of strings containing topics from the article with no extra commentary. Regarding secondary criteria, it successfully extracts both explicitly stated topics (neuroplasticity, stroke rehabilitation, BDNF, hippocampal enlargement) and implicitly inferred topics (neural adaptation, cognitive demands, neurodegenerative disease treatment). The extraction avoids generic embedded terms while capturing 13 distinct conceptual areas. The only minor issue is slight conceptual overlap between 'brain reorganization' and 'neural adaptation,' but both represent distinct framings of the same phenomenon and are both present in the source material. The solution demonstrates strong understanding of the passage and appropriate topic extraction methodology."
+  },
+  {
+    "output": "```json\n[\n  \"brain-computer interfaces\",\n  \"neural signal decoding\",\n  \"consciousness\",\n  \"epistemology\",\n  \"subjective experience\",\n  \"informed consent\",\n  \"paralysis\",\n  \"experimental procedures\",\n  \"philosophy of other minds\",\n  \"personal autonomy\",\n  \"individual identity\",\n  \"neural patterns\",\n  \"motor output\",\n  \"regulatory frameworks\",\n  \"governance gap\",\n  \"policy ethics\",\n  \"bioethics\"\n]\n```",
+    "test_case": {
+      "prompt_inputs": {
+        "content": "Recent advances in neurotechnology have raised profound questions at the intersection of neuroscience, philosophy, and bioethics. Researchers developing brain-computer interfaces (BCIs) that decode neural signals must grapple with epistemological questions about the nature of consciousness and whether direct neural measurement can provide objective access to subjective experience. Simultaneously, the clinical deployment of these technologies presents ethical challenges regarding informed consent, as patients with severe paralysis may face pressure to participate in experimental procedures. The philosophical problem of other minds becomes particularly acute when BCIs potentially allow one individual's neural patterns to influence another's motor output, challenging our fundamental assumptions about personal autonomy and individual identity. Furthermore, regulatory frameworks struggle to keep pace with the neuroscientific capabilities, creating a governance gap that intersects policy ethics with technical feasibility."
+      },
+      "solution_criteria": [
+        "Identifies all four distinct conceptual domains: neuroscience/neurotechnology, philosophy/epistemology, ethics/bioethics, and policy/governance",
+        "Separates related but distinct topics (e.g., consciousness as philosophy vs. neural measurement as neuroscience) into different entries",
+        "Returns output as a JSON array of strings with no duplicate or merged topics"
+      ],
+      "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+      "scenario": "Testing with interdisciplinary passage containing mixed topics (e.g., neuroscience, philosophy, and ethics) to ensure the prompt correctly identifies and separates distinct conceptual domains rather than merging related ideas"
+    },
+    "score": 8,
+    "reasoning": "The solution meets all mandatory requirements: it is a valid JSON array of strings with no extra commentary, contains no duplicates, and includes topics from the passage. It successfully addresses the secondary criteria by identifying all four conceptual domains and separating related but distinct topics. However, there are minor gaps in comprehensiveness\u2014some explicitly mentioned concepts like 'neurotechnology,' 'neuroscience,' and 'technical feasibility' are omitted, while a few entries ('neural patterns,' 'motor output') are somewhat granular implementation details rather than primary conceptual topics. These are minor issues that don't violate mandatory requirements but represent incomplete coverage of the source material."
+  },
+  {
+    "output": "```json\n[\n  \"CRISPR-Cas9 gene editing\",\n  \"off-target mitigation strategies\",\n  \"delivery mechanisms\",\n  \"sgRNA design optimization\",\n  \"machine learning-assisted prediction models\",\n  \"lipid nanoparticles (LNPs)\",\n  \"adeno-associated viruses (AAVs)\",\n  \"transfection efficiency\",\n  \"PAM flexibility\",\n  \"engineered Cas9 variants\",\n  \"monogenic disorders\",\n  \"off-target effects\",\n  \"clinical translation\",\n  \"high-throughput screening platforms\",\n  \"functional genomics\",\n  \"gene function\",\n  \"regulatory networks\"\n]\n```",
+    "test_case": {
+      "prompt_inputs": {
+        "content": "Recent advances in CRISPR-Cas9 gene editing have revolutionized molecular biology research, particularly through improvements in off-target mitigation strategies and delivery mechanisms. The sgRNA (single guide RNA) design optimization has significantly reduced unwanted mutations, with specificity scores improving from 87% to 96% through machine learning-assisted prediction models. Furthermore, non-viral delivery vectors, including lipid nanoparticles (LNPs) and adeno-associated viruses (AAVs), have demonstrated enhanced transfection efficiency in primary human cells. PAM (protospacer adjacent motif) flexibility has been expanded through engineered Cas9 variants, enabling targeting of previously inaccessible genomic loci. These developments have direct implications for therapeutic applications in monogenic disorders, though off-target effects remain a critical consideration in clinical translation. The integration of CRISPR technology with high-throughput screening platforms has accelerated functional genomics studies, providing unprecedented insights into gene function and regulatory networks."
+      },
+      "solution_criteria": [
+        "Extracts distinct topics (e.g., off-target mitigation, sgRNA design, delivery vectors, PAM flexibility, therapeutic applications, functional genomics) while avoiding treating acronyms (CRISPR, sgRNA, LNP, AAV, PAM, Cas9) as separate topics",
+        "Returns output as a JSON array of strings",
+        "Identifies meaningful scientific concepts rather than repeated technical terminology"
+      ],
+      "task_description": "Extract topics out of a passage of text from a scholarly article into a JSON array of strings",
+      "scenario": "Testing with a highly specialized passage using domain-specific jargon and acronyms to ensure the prompt extracts meaningful topics while properly handling technical terminology that appears frequently but may not represent distinct topics"
+    },
+    "score": 7,
+    "reasoning": "The solution meets all mandatory requirements: it is a valid JSON array of strings with no extra commentary, and contains topics from the article. It demonstrates good judgment in handling acronyms per the secondary criteria. However, it has moderate deficiencies in topic selection\u2014some entries are overly specific technical details rather than meaningful scientific concepts, and there is some redundancy in related concepts. The solution is functional and largely correct but could be more refined in distinguishing between core topics and implementation details."
+  }
+]
